@@ -13,3 +13,6 @@
 [submodule "ROS_Core/src/Utility/AprilTagSLAM_ROS"]
 	path = ROS_Core/src/Utility/AprilTagSLAM_ROS
 	url = https://github.com/SafeRoboticsLab/AprilTagSLAM_ROS.git
+[submodule "ROS_Core/src/Labs/Lab1"]
+	path = ROS_Core/src/Labs/Lab1
+	url = https://github.com/SafeRoboticsLab/PrincetonRaceCar_planning.git
