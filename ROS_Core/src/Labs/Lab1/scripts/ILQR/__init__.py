@@ -1,2 +1,2 @@
 from .ref_path import RefPath
-from .ilqr import ILQR
+from .ilqr_np import ILQR_np as ILQR
