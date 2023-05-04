@@ -1,0 +1,34 @@
+<launch>
+    
+    <env name="LD_PRELOAD" value="$(env CONDA_PREFIX)/lib/libyaml-cpp.so" />
+    <arg name="output"              default="screen"                doc="display output to screen or log file"/>
+    <arg name="odom_topic"          default="/SLAM/Pose"            doc="ROS topic for the pose"/>
+    <arg name="control_topic"       default="/Control"              doc="ROS topic for control input"/>
+    <arg name="lane_change_cost"    default="1"                     doc="cost of lane change"/>
+    <arg name="static_obs_size"     default="0.2"                   doc="type of static obsects"/>
+    <arg name="static_obs_topic"    default="/Obstacles/Static"     doc="ROS topic for static obstacles"/>
+    <arg name="dyn_obs_topic"       default="/Obstacles/Dynamic"    doc="ROS topic for dynamic obstacles"/>
+    <arg name="obstacle_topic"      default="/Prediction/Obstacles" doc="ROS topic for obstacles"/>
+    <arg name="traj_topic"          default="/Planning/Trajectory"  doc="ROS topic for trajectory"/>
+    <arg name="path_topic"          default="/Routing/Path"         doc="ROS topic for reference path"/>
+    <arg name="receding_horizon"    default="false"                 doc="whether to use open loop planner"/>
+    <arg name="replan_dt"           default="0.1"                   doc="time step for replanning"/>
+    <arg name="ilqr_config"         default="configs/lab1.yaml"     doc="path to ilqr config file"/>
+    <arg name="pub_rate"            default="30"                    doc="rate at which to publish the pose"/>
+    <arg name="init_x"              default="3"                     doc="initial x position"/>
+    <arg name="init_y"              default="0.15"                  doc="initial y position"/>
+    <arg name="init_yaw"            default="0"                     doc="initial z position"/>
+
+    <rosparam file="$(find final_project)/task1.yaml" command="load" />
+
+    <include file="$(find racecar_planner)/launch/ilqr_truck.launch" >
+    </include>
+
+    <include file="$(find final_project)/launch/task1_detection.launch">
+    </include>
+
+    <node pkg="final_project" type="broadcast_waypoint_node.py" name="broadcast_waypoint" output="$(arg output)">
+         <param name="odom_topic"           value="$(arg odom_topic)" />
+    </node>
+</launch>
+
