@@ -1,8 +1,10 @@
 <launch>
     
+    <!-- don't use anymore -->
+    
     <env name="LD_PRELOAD" value="$(env CONDA_PREFIX)/lib/libyaml-cpp.so" />
     <arg name="output"              default="screen"                doc="display output to screen or log file"/>
-    <arg name="odom_topic"          default="/SLAM/Pose"            doc="ROS topic for the pose"/>
+    <arg name="odom_topic"          default="/Simulation/Pose"            doc="ROS topic for the pose"/>
     <arg name="control_topic"       default="/Control"              doc="ROS topic for control input"/>
     <arg name="lane_change_cost"    default="1"                     doc="cost of lane change"/>
     <arg name="static_obs_size"     default="0.2"                   doc="type of static obsects"/>
@@ -21,7 +23,7 @@
 
     <rosparam file="$(find final_project)/task1.yaml" command="load" />
 
-    <include file="$(find racecar_planner)/launch/ilqr_truck.launch" >
+    <include file="$(find racecar_planner)/launch/ilqr_simulation.launch" >
     </include>
 
     <include file="$(find final_project)/launch/task1_detection.launch">
@@ -30,5 +32,6 @@
     <node pkg="final_project" type="broadcast_waypoint_node.py" name="broadcast_waypoint" output="$(arg output)">
          <param name="odom_topic"           value="$(arg odom_topic)" />
     </node>
+
 </launch>
 

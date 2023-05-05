@@ -136,3 +136,9 @@ if __name__ == '__main__':
     rospy.loginfo("Broadcast Waypoint node")
     BroadWay()
     rospy.spin()
+    
+    
+    # call ilqr with cost function (tracking) + getting close to obstacle
+    # define cost function ignoring far away peaks for this planning cycle to only include obstacles within horizon
+    # minimize this cost function
+    # add into trajectory planner node
