@@ -120,6 +120,7 @@ install(PROGRAMS
   scripts/task2_world_node.py
   scripts/task1_obstacle_detection_node.py
   scripts/broadcast_waypoint_node.py
+  scripts/task2_main_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
